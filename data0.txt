@@ -1,0 +1,1488 @@
+MariaDB [collegeerp]> select s.name,m.name fro stu s inner join stu m on s.rno=m.rno;
+
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'stu s inner join stu m on s.rno=m.rno' at line 1
+
+MariaDB [collegeerp]> select s.name,m.name from stu s inner join stu m on s.rno=m.monitor;
+
++------+--------+
+
+| name | name   |
+
++------+--------+
+
+| amar | ishwar |
+
+| amar | eshwar |
+
+| amar | ramesh |
+
+| amar | test   |
+
+| amar | test   |
+
+| amar | test   |
+
+| amar | test   |
+
+| amar | kavi   |
+
+| amar | jay    |
+
+| amar | shashi |
+
+| amar | kapil  |
+
++------+--------+
+
+11 rows in set (0.000 sec)
+
+
+
+MariaDB [collegeerp]> select s.name as monitor,m.name as student from stu s inner join stu m on s.rno=m.monitor;
+
++---------+---------+
+
+| monitor | student |
+
++---------+---------+
+
+| amar    | ishwar  |
+
+| amar    | eshwar  |
+
+| amar    | ramesh  |
+
+| amar    | test    |
+
+| amar    | test    |
+
+| amar    | test    |
+
+| amar    | test    |
+
+| amar    | kavi    |
+
+| amar    | jay     |
+
+| amar    | shashi  |
+
+| amar    | kapil   |
+
++---------+---------+
+
+11 rows in set (0.000 sec)
+
+
+
+MariaDB [collegeerp]> select * from stu;
+
++-----+--------+-------+---------+
+
+| rno | name   | fee   | monitor |
+
++-----+--------+-------+---------+
+
+|   1 | amar   | 12000 |    NULL |
+
+|   2 | ishwar | 12000 |       1 |
+
+|   3 | eshwar | 12000 |       1 |
+
+|   8 | ramesh |  NULL |       1 |
+
+|   9 | test   |  5000 |       1 |
+
+|  10 | test   |  NULL |       1 |
+
+|  11 | test   |  5000 |       1 |
+
+|  12 | test   |  NULL |       1 |
+
+|  13 | kavi   | 45000 |       1 |
+
+|  14 | jay    | 50000 |       1 |
+
+|  15 | shashi | 35000 |       1 |
+
+|  16 | kapil  |  3300 |       1 |
+
++-----+--------+-------+---------+
+
+12 rows in set (0.000 sec)
+
+
+
+MariaDB [collegeerp]> update stu set monitor=14 where rno!=14 and rno in (10,12,16);
+
+Query OK, 3 rows affected (0.100 sec)
+
+Rows matched: 3  Changed: 3  Warnings: 0
+
+
+
+MariaDB [collegeerp]> select * from stu;
+
++-----+--------+-------+---------+
+
+| rno | name   | fee   | monitor |
+
++-----+--------+-------+---------+
+
+|   1 | amar   | 12000 |    NULL |
+
+|   2 | ishwar | 12000 |       1 |
+
+|   3 | eshwar | 12000 |       1 |
+
+|   8 | ramesh |  NULL |       1 |
+
+|   9 | test   |  5000 |       1 |
+
+|  10 | test   |  NULL |      14 |
+
+|  11 | test   |  5000 |       1 |
+
+|  12 | test   |  NULL |      14 |
+
+|  13 | kavi   | 45000 |       1 |
+
+|  14 | jay    | 50000 |       1 |
+
+|  15 | shashi | 35000 |       1 |
+
+|  16 | kapil  |  3300 |      14 |
+
++-----+--------+-------+---------+
+
+12 rows in set (0.000 sec)
+
+
+
+MariaDB [collegeerp]> update stu set monitor=null where rno=14;
+
+Query OK, 1 row affected (0.073 sec)
+
+Rows matched: 1  Changed: 1  Warnings: 0
+
+
+
+MariaDB [collegeerp]> select s.name as monitor,m.name as student from stu s inner join stu m on s.rno=m.monitor;
+
++---------+---------+
+
+| monitor | student |
+
++---------+---------+
+
+| amar    | ishwar  |
+
+| amar    | eshwar  |
+
+| amar    | ramesh  |
+
+| amar    | test    |
+
+| jay     | test    |
+
+| amar    | test    |
+
+| jay     | test    |
+
+| amar    | kavi    |
+
+| amar    | shashi  |
+
+| jay     | kapil   |
+
++---------+---------+
+
+10 rows in set (0.000 sec)
+
+
+
+MariaDB [collegeerp]> notee
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+| rno | name   | fee   |
+
++-----+--------+-------+
+
+|   1 | amar   | 12000 |
+
+|   2 | ishwar | 12000 |
+
+|   3 | eshwar | 12000 |
+
+|   8 | ramesh |  NULL |
+
+|   9 | test   |  5000 |
+
+|  10 | test   |  NULL |
+
+|  11 | test   |  5000 |
+
+|  12 | test   |  NULL |
+
+|  13 | kavi   | 45000 |
+
+|  14 | jay    | 50000 |
+
+|  15 | shashi | 35000 |
+
+|  16 | kapil  |  3300 |
+
++-----+--------+-------+
+
+12 rows in set (0.000 sec)
+
+
+
+MariaDB [collegeerp]> select * from stu1;
+
++-----+-------+-------+
+
+| rn  | sname | fee   |
+
++-----+-------+-------+
+
+| 101 | xyz   | 45000 |
+
+| 102 | mno   | 55000 |
+
+| 103 | xyz   | 55000 |
+
++-----+-------+-------+
+
+3 rows in set (0.000 sec)
+
+
+
+MariaDB [collegeerp]> insert into stu1 values(1,'amar',12000);
+
+Query OK, 1 row affected (0.106 sec)
+
+
+
+MariaDB [collegeerp]> select * from stu union select * from stu1;
+
++-----+--------+-------+
+
+| rno | name   | fee   |
+
++-----+--------+-------+
+
+|   1 | amar   | 12000 |
+
+|   2 | ishwar | 12000 |
+
+|   3 | eshwar | 12000 |
+
+|   8 | ramesh |  NULL |
+
+|   9 | test   |  5000 |
+
+|  10 | test   |  NULL |
+
+|  11 | test   |  5000 |
+
+|  12 | test   |  NULL |
+
+|  13 | kavi   | 45000 |
+
+|  14 | jay    | 50000 |
+
+|  15 | shashi | 35000 |
+
+|  16 | kapil  |  3300 |
+
+| 101 | xyz    | 45000 |
+
+| 102 | mno    | 55000 |
+
+| 103 | xyz    | 55000 |
+
++-----+--------+-------+
+
+15 rows in set (0.001 sec)
+
+
+
+MariaDB [collegeerp]> select * from stu1;
+
++-----+-------+-------+
+
+| rn  | sname | fee   |
+
++-----+-------+-------+
+
+|   1 | amar  | 12000 |
+
+| 101 | xyz   | 45000 |
+
+| 102 | mno   | 55000 |
+
+| 103 | xyz   | 55000 |
+
++-----+-------+-------+
+
+4 rows in set (0.000 sec)
+
+
+
+MariaDB [collegeerp]> select * from stu union all select * from stu1;
+
++-----+--------+-------+
+
+| rno | name   | fee   |
+
++-----+--------+-------+
+
+|   1 | amar   | 12000 |
+
+|   2 | ishwar | 12000 |
+
+|   3 | eshwar | 12000 |
+
+|   8 | ramesh |  NULL |
+
+|   9 | test   |  5000 |
+
+|  10 | test   |  NULL |
+
+|  11 | test   |  5000 |
+
+|  12 | test   |  NULL |
+
+|  13 | kavi   | 45000 |
+
+|  14 | jay    | 50000 |
+
+|  15 | shashi | 35000 |
+
+|  16 | kapil  |  3300 |
+
+|   1 | amar   | 12000 |
+
+| 101 | xyz    | 45000 |
+
+| 102 | mno    | 55000 |
+
+| 103 | xyz    | 55000 |
+
++-----+--------+-------+
+
+16 rows in set (0.001 sec)
+
+
+
+MariaDB [collegeerp]> select * from stu intersect select * from stu1;
+
++-----+------+-------+
+
+| rno | name | fee   |
+
++-----+------+-------+
+
+|   1 | amar | 12000 |
+
++-----+------+-------+
+
+1 row in set (0.001 sec)
+
+
+
+MariaDB [collegeerp]> select * from stu minus select * from stu1;
+
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that
+
+corresponds to your MariaDB server version for the right syntax to use near 'sel
+
+ect * from stu1' at line 1
+
+MariaDB [collegeerp]> select * from stu difference select * from stu1;
+
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that
+
+corresponds to your MariaDB server version for the right syntax to use near 'sel
+
+ect * from stu1' at line 1
+
+MariaDB [collegeerp]> select * from stu except select * from stu1;
+
++-----+--------+-------+
+
+| rno | name   | fee   |
+
++-----+--------+-------+
+
+|   2 | ishwar | 12000 |
+
+|   3 | eshwar | 12000 |
+
+|   8 | ramesh |  NULL |
+
+|   9 | test   |  5000 |
+
+|  10 | test   |  NULL |
+
+|  11 | test   |  5000 |
+
+|  12 | test   |  NULL |
+
+|  13 | kavi   | 45000 |
+
+|  14 | jay    | 50000 |
+
+|  15 | shashi | 35000 |
+
+|  16 | kapil  |  3300 |
+
++-----+--------+-------+
+
+11 rows in set (0.001 sec)
+
+
+
+MariaDB [collegeerp]> select * from stu1 except select * from stu;
+
++-----+-------+-------+
+
+| rn  | sname | fee   |
+
++-----+-------+-------+
+
+| 101 | xyz   | 45000 |
+
+| 102 | mno   | 55000 |
+
+| 103 | xyz   | 55000 |
+
++-----+-------+-------+
+
+3 rows in set (0.001 sec)
+
+
+
+MariaDB [collegeerp]> select * from stu;
+
++-----+--------+-------+
+
+| rno | name   | fee   |
+
++-----+--------+-------+
+
+|   1 | amar   | 12000 |
+
+|   2 | ishwar | 12000 |
+
+|   3 | eshwar | 12000 |
+
+|   8 | ramesh |  NULL |
+
+|   9 | test   |  5000 |
+
+|  10 | test   |  NULL |
+
+|  11 | test   |  5000 |
+
+|  12 | test   |  NULL |
+
+|  13 | kavi   | 45000 |
+
+|  14 | jay    | 50000 |
+
+|  15 | shashi | 35000 |
+
+|  16 | kapil  |  3300 |
+
++-----+--------+-------+
+
+12 rows in set (0.001 sec)
+
+
+
+MariaDB [collegeerp]> select * from stu where mod(rno,3)==0 union select * from
+
+stu where mod(rno,5)==0;
+
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that
+
+corresponds to your MariaDB server version for the right syntax to use near '=0
+
+union select * from stu where mod(rno,5)==0' at line 1
+
+MariaDB [collegeerp]> select * from stu where mod(rno,3)=0 union select * from s
+
+tu where mod(rno,5)=0;
+
++-----+--------+-------+
+
+| rno | name   | fee   |
+
++-----+--------+-------+
+
+|   3 | eshwar | 12000 |
+
+|   9 | test   |  5000 |
+
+|  12 | test   |  NULL |
+
+|  15 | shashi | 35000 |
+
+|  10 | test   |  NULL |
+
++-----+--------+-------+
+
+5 rows in set (0.002 sec)
+
+
+
+MariaDB [collegeerp]> select rno fro stu uinion select rno from stu1;
+
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that
+
+corresponds to your MariaDB server version for the right syntax to use near 'stu
+
+ uinion select rno from stu1' at line 1
+
+MariaDB [collegeerp]> select rno from stu union select rno from stu1;
+
+ERROR 1054 (42S22): Unknown column 'rno' in 'field list'
+
+MariaDB [collegeerp]> select rno from stu union select rn from stu1;
+
++-----+
+
+| rno |
+
++-----+
+
+|   1 |
+
+|   2 |
+
+|   3 |
+
+|   8 |
+
+|   9 |
+
+|  10 |
+
+|  11 |
+
+|  12 |
+
+|  13 |
+
+|  14 |
+
+|  15 |
+
+|  16 |
+
+| 101 |
+
+| 102 |
+
+| 103 |
+
++-----+
+
+15 rows in set (0.000 sec)
+
+
+
+MariaDB [collegeerp]> select rno,sname from stu union select rn from stu1;
+
+ERROR 1054 (42S22): Unknown column 'sname' in 'field list'
+
+MariaDB [collegeerp]> create table dept(deptid int,deptname varchar(50));
+
+Query OK, 0 rows affected (0.343 sec)
+
+
+
+MariaDB [collegeerp]> create table emp(empid int,empname varchar(50),dno int);
+
+Query OK, 0 rows affected (0.210 sec)
+
+
+
+MariaDB [collegeerp]> insert into dept values(10,'IT');
+
+Query OK, 1 row affected (0.089 sec)
+
+
+
+MariaDB [collegeerp]> insert into dept values(20,'SALES');
+
+Query OK, 1 row affected (0.081 sec)
+
+
+
+MariaDB [collegeerp]> insert into dept values(30,'MKT');
+
+Query OK, 1 row affected (0.076 sec)
+
+
+
+MariaDB [collegeerp]> insert into emp values(1001,'xyz',10);
+
+Query OK, 1 row affected (0.081 sec)
+
+
+
+MariaDB [collegeerp]> insert into emp values(1002,'ramkumar',10);
+
+Query OK, 1 row affected (0.063 sec)
+
+
+
+MariaDB [collegeerp]> insert into emp values(1003,'Jatin',30);
+
+Query OK, 1 row affected (0.060 sec)
+
+
+
+MariaDB [collegeerp]> insert into emp values(1004,'Ramesh',300);
+
+Query OK, 1 row affected (0.084 sec)
+
+
+
+MariaDB [collegeerp]> select * from dept;
+
++--------+----------+
+
+| deptid | deptname |
+
++--------+----------+
+
+|     10 | IT       |
+
+|     20 | SALES    |
+
+|     30 | MKT      |
+
++--------+----------+
+
+3 rows in set (0.000 sec)
+
+
+
+MariaDB [collegeerp]> select * from emp;
+
++-------+----------+------+
+
+| empid | empname  | dno  |
+
++-------+----------+------+
+
+|  1001 | xyz      |   10 |
+
+|  1002 | ramkumar |   10 |
+
+|  1003 | Jatin    |   30 |
+
+|  1004 | Ramesh   |  300 |
+
++-------+----------+------+
+
+4 rows in set (0.000 sec)
+
+
+
+MariaDB [collegeerp]> select * from dept cross join emp;
+
++--------+----------+-------+----------+------+
+
+| deptid | deptname | empid | empname  | dno  |
+
++--------+----------+-------+----------+------+
+
+|     10 | IT       |  1001 | xyz      |   10 |
+
+|     20 | SALES    |  1001 | xyz      |   10 |
+
+|     30 | MKT      |  1001 | xyz      |   10 |
+
+|     10 | IT       |  1002 | ramkumar |   10 |
+
+|     20 | SALES    |  1002 | ramkumar |   10 |
+
+|     30 | MKT      |  1002 | ramkumar |   10 |
+
+|     10 | IT       |  1003 | Jatin    |   30 |
+
+|     20 | SALES    |  1003 | Jatin    |   30 |
+
+|     30 | MKT      |  1003 | Jatin    |   30 |
+
+|     10 | IT       |  1004 | Ramesh   |  300 |
+
+|     20 | SALES    |  1004 | Ramesh   |  300 |
+
+|     30 | MKT      |  1004 | Ramesh   |  300 |
+
++--------+----------+-------+----------+------+
+
+12 rows in set (0.000 sec)
+
+
+
+MariaDB [collegeerp]> select * from dept inner join emp on dept.deptid=emp.dno;
+
++--------+----------+-------+----------+------+
+
+| deptid | deptname | empid | empname  | dno  |
+
++--------+----------+-------+----------+------+
+
+|     10 | IT       |  1001 | xyz      |   10 |
+
+|     10 | IT       |  1002 | ramkumar |   10 |
+
+|     30 | MKT      |  1003 | Jatin    |   30 |
+
++--------+----------+-------+----------+------+
+
+3 rows in set (0.001 sec)
+
+
+
+MariaDB [collegeerp]> select * from dept left outer join emp on dept.deptid=emp.
+
+dno;
+
++--------+----------+-------+----------+------+
+
+| deptid | deptname | empid | empname  | dno  |
+
++--------+----------+-------+----------+------+
+
+|     10 | IT       |  1001 | xyz      |   10 |
+
+|     10 | IT       |  1002 | ramkumar |   10 |
+
+|     30 | MKT      |  1003 | Jatin    |   30 |
+
+|     20 | SALES    |  NULL | NULL     | NULL |
+
++--------+----------+-------+----------+------+
+
+4 rows in set (0.001 sec)
+
+
+
+MariaDB [collegeerp]> select * from dept right outer join emp on dept.deptid=emp
+
+.dno;
+
++--------+----------+-------+----------+------+
+
+| deptid | deptname | empid | empname  | dno  |
+
++--------+----------+-------+----------+------+
+
+|     10 | IT       |  1001 | xyz      |   10 |
+
+|     10 | IT       |  1002 | ramkumar |   10 |
+
+|     30 | MKT      |  1003 | Jatin    |   30 |
+
+|   NULL | NULL     |  1004 | Ramesh   |  300 |
+
++--------+----------+-------+----------+------+
+
+4 rows in set (0.000 sec)
+
+
+
+MariaDB [collegeerp]>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Syntax of the described table
+
+desc table name
+
+
+
++----------------+-------------+------+-----+---------+-------+
+
+| Field          | Type        | Null | Key | Default | Extra |
+
++----------------+-------------+------+-----+---------+-------+
+
+| login_id       | int(11)     | NO   | PRI | NULL    |       |
+
+| login_username | varchar(50) | YES  |     | NULL    |       |
+
+| login_password | varchar(50) | YES  |     | NULL    |       |
+
+| login_roleid   | int(11)     | YES  | MUL | NULL    |       |
+
++----------------+-------------+------+-----+---------+-------+
+
+4 rows in set (0.004 sec)
+
+
+
+MariaDB [collegeerp]> alter table login drop constraint fk_login_roleid_login;
+
+Query OK, 0 rows affected (0.116 sec)
+
+Records: 0  Duplicates: 0  Warnings: 0
+
+
+
+MariaDB [collegeerp]> desc login;
+
++----------------+-------------+------+-----+---------+-------+
+
+| Field          | Type        | Null | Key | Default | Extra |
+
++----------------+-------------+------+-----+---------+-------+
+
+| login_id       | int(11)     | NO   | PRI | NULL    |       |
+
+| login_username | varchar(50) | YES  |     | NULL    |       |
+
+| login_password | varchar(50) | YES  |     | NULL    |       |
+
+| login_roleid   | int(11)     | YES  | MUL | NULL    |       |
+
++----------------+-------------+------+-----+---------+-------+
+
+4 rows in set (0.003 sec)
+
+
+
+MariaDB [collegeerp]> alter table login drop constraint fk_login_roleid_login fo
+
+reign key;
+
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that
+
+corresponds to your MariaDB server version for the right syntax to use near 'for
+
+eign key' at line 1
+
+MariaDB [collegeerp]> alter table login drop constraint foreign key fk_login_rol
+
+eid_login;
+
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that
+
+corresponds to your MariaDB server version for the right syntax to use near 'for
+
+eign key fk_login_roleid_login' at line 1
+
+MariaDB [collegeerp]> alter table login drop constraint fk_login_roleid_login fo
+
+reign key;
+
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that
+
+corresponds to your MariaDB server version for the right syntax to use near 'for
+
+eign key' at line 1
+
+MariaDB [collegeerp]> alter table login drop constraint foreign key fk_login_rol
+
+eid_login;
+
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that
+
+corresponds to your MariaDB server version for the right syntax to use near 'for
+
+eign key fk_login_roleid_login' at line 1
+
+MariaDB [collegeerp]> alter table login drop constraint fk_login_roleid_login fo
+
+reign key;
+
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that
+
+corresponds to your MariaDB server version for the right syntax to use near 'for
+
+eign key' at line 1
+
+MariaDB [collegeerp]> alter table login drop foreign key fk_login_roleid_login;
+
+ERROR 1091 (42000): Can't DROP FOREIGN KEY `fk_login_roleid_login`; check that i
+
+t exists
+
+MariaDB [collegeerp]> desc login;
+
++----------------+-------------+------+-----+---------+-------+
+
+| Field          | Type        | Null | Key | Default | Extra |
+
++----------------+-------------+------+-----+---------+-------+
+
+| login_id       | int(11)     | NO   | PRI | NULL    |       |
+
+| login_username | varchar(50) | YES  |     | NULL    |       |
+
+| login_password | varchar(50) | YES  |     | NULL    |       |
+
+| login_roleid   | int(11)     | YES  | MUL | NULL    |       |
+
++----------------+-------------+------+-----+---------+-------+
+
+4 rows in set (0.002 sec)
+
+
+
+MariaDB [collegeerp]> show create table login;
+
++-------+-----------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------+
+
+| Table | Create Table
+
+
+
+
+
+                                                                    |
+
++-------+-----------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------+
+
+| login | CREATE TABLE `login` (
+
+  `login_id` int(11) NOT NULL,
+
+  `login_username` varchar(50) DEFAULT NULL,
+
+  `login_password` varchar(50) DEFAULT NULL,
+
+  `login_roleid` int(11) DEFAULT NULL,
+
+  PRIMARY KEY (`login_id`),
+
+  KEY `fk_login_roleid_login` (`login_roleid`)
+
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 |
+
++-------+-----------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------+
+
+1 row in set (0.000 sec)
+
+
+
+MariaDB [collegeerp]> show create table role;
+
+ERROR 1146 (42S02): Table 'collegeerp.role' doesn't exist
+
+MariaDB [collegeerp]> show create table roles;
+
++-------+-----------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+
++
+
+| Table | Create Table
+
+
+
+
+
+|
+
++-------+-----------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+
++
+
+| roles | CREATE TABLE `roles` (
+
+  `roleid` int(11) NOT NULL,
+
+  `rolename` varchar(50) NOT NULL,
+
+  `role_desc` varchar(50) DEFAULT NULL,
+
+  PRIMARY KEY (`roleid`),
+
+  UNIQUE KEY `rolename` (`rolename`)
+
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 |
+
++-------+-----------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+
++
+
+1 row in set (0.000 sec)
+
+
+
+MariaDB [collegeerp]> show create table login;
+
++-------+-----------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------+
+
+| Table | Create Table
+
+
+
+
+
+                                                                    |
+
++-------+-----------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------+
+
+| login | CREATE TABLE `login` (
+
+  `login_id` int(11) NOT NULL,
+
+  `login_username` varchar(50) DEFAULT NULL,
+
+  `login_password` varchar(50) DEFAULT NULL,
+
+  `login_roleid` int(11) DEFAULT NULL,
+
+  PRIMARY KEY (`login_id`),
+
+  KEY `fk_login_roleid_login` (`login_roleid`)
+
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 |
+
++-------+-----------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------+
+
+1 row in set (0.000 sec)
+
+
+
+MariaDB [collegeerp]> alter table login drop foreign key fk_login_roleid_login;
+
+ERROR 1091 (42000): Can't DROP FOREIGN KEY `fk_login_roleid_login`; check that i
+
+t exists
+
+MariaDB [collegeerp]> ALTER TABLE `login` DROP INDEX `fk_login_roleid_login`;
+
+Query OK, 0 rows affected (0.350 sec)
+
+Records: 0  Duplicates: 0  Warnings: 0
+
+
+
+MariaDB [collegeerp]> show create table login;
+
++-------+-----------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+
+--------------------+
+
+| Table | Create Table
+
+
+
+
+
+                    |
+
++-------+-----------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+
+--------------------+
+
+| login | CREATE TABLE `login` (
+
+  `login_id` int(11) NOT NULL,
+
+  `login_username` varchar(50) DEFAULT NULL,
+
+  `login_password` varchar(50) DEFAULT NULL,
+
+  `login_roleid` int(11) DEFAULT NULL,
+
+  PRIMARY KEY (`login_id`)
+
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 |
+
++-------+-----------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+
+--------------------+
+
+1 row in set (0.000 sec)
+
+
+
+MariaDB [collegeerp]> alter table drop constraint primary key;
+
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that
+
+corresponds to your MariaDB server version for the right syntax to use near 'dro
+
+p constraint primary key' at line 1
+
+MariaDB [collegeerp]> alter table drop primary key;
+
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that
+
+corresponds to your MariaDB server version for the right syntax to use near 'dro
+
+p primary key' at line 1
+
+MariaDB [collegeerp]> alter table login drop constraint primary key;
+
+Query OK, 0 rows affected (0.576 sec)
+
+Records: 0  Duplicates: 0  Warnings: 0
+
+
+
+MariaDB [collegeerp]> show create table login;
+
++-------+-----------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+
+------------------------------------------------------------------------+
+
+| Table | Create Table
+
+
+
+                                                                        |
+
++-------+-----------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+
+------------------------------------------------------------------------+
+
+| login | CREATE TABLE `login` (
+
+  `login_id` int(11) NOT NULL,
+
+  `login_username` varchar(50) DEFAULT NULL,
+
+  `login_password` varchar(50) DEFAULT NULL,
+
+  `login_roleid` int(11) DEFAULT NULL
+
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 |
+
++-------+-----------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+
+------------------------------------------------------------------------+
+
+1 row in set (0.001 sec)
+
+
+
+MariaDB [collegeerp]> alter table login add constraint pk_login_loginid primary
+
+key;
+
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that
+
+corresponds to your MariaDB server version for the right syntax to use near '' a
+
+t line 1
+
+MariaDB [collegeerp]> alter table login add constraint pk_login_loginid primary
+
+key(login_id);
+
+Query OK, 0 rows affected, 1 warning (0.448 sec)
+
+Records: 0  Duplicates: 0  Warnings: 1
+
+
+
+MariaDB [collegeerp]> show create table login;
+
++-------+-----------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+
+--------------------+
+
+| Table | Create Table
+
+
+
+
+
+                    |
+
++-------+-----------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+
+--------------------+
+
+| login | CREATE TABLE `login` (
+
+  `login_id` int(11) NOT NULL,
+
+  `login_username` varchar(50) DEFAULT NULL,
+
+  `login_password` varchar(50) DEFAULT NULL,
+
+  `login_roleid` int(11) DEFAULT NULL,
+
+  PRIMARY KEY (`login_id`)
+
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 |
+
++-------+-----------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+
+--------------------+
+
+1 row in set (0.000 sec)
+
+
+
+MariaDB [collegeerp]> alter table login add constraint fk_test foreign key(login
+
+_roleid) references roles(role_id));
+
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that
+
+corresponds to your MariaDB server version for the right syntax to use near ')'
+
+at line 1
+
+MariaDB [collegeerp]> alter table login add constraint fk_test foreign key login
+
+_roleid references roles(role_id));
+
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that
+
+corresponds to your MariaDB server version for the right syntax to use near 'ref
+
+erences roles(role_id))' at line 1
+
+MariaDB [collegeerp]> alter table login add constraint fk_test foreign key(login
+
+_roleid) references roles(role_id);
+
+ERROR 1005 (HY000): Can't create table `collegeerp`.`login` (errno: 150 "Foreign
+
+ key constraint is incorrectly formed")
+
+MariaDB [collegeerp]> alter table login add constraint fk_test_123 foreign key(l
+
+ogin_roleid) references roles(role_id);
+
+ERROR 1005 (HY000): Can't create table `collegeerp`.`login` (errno: 150 "Foreign
+
+ key constraint is incorrectly formed")
+
+MariaDB [collegeerp]> desc roles;
+
++-----------+-------------+------+-----+---------+-------+
+
+| Field     | Type        | Null | Key | Default | Extra |
+
++-----------+-------------+------+-----+---------+-------+
+
+| roleid    | int(11)     | NO   | PRI | NULL    |       |
+
+| rolename  | varchar(50) | NO   | UNI | NULL    |       |
+
+| role_desc | varchar(50) | YES  |     | NULL    |       |
+
++-----------+-------------+------+-----+---------+-------+
+
+3 rows in set (0.003 sec)
+
+
+
+MariaDB [collegeerp]> desc login;
+
++----------------+-------------+------+-----+---------+-------+
+
+| Field          | Type        | Null | Key | Default | Extra |
+
++----------------+-------------+------+-----+---------+-------+
+
+| login_id       | int(11)     | NO   | PRI | NULL    |       |
+
+| login_username | varchar(50) | YES  |     | NULL    |       |
+
+| login_password | varchar(50) | YES  |     | NULL    |       |
+
+| login_roleid   | int(11)     | YES  |     | NULL    |       |
+
++----------------+-------------+------+-----+---------+-------+
+
+4 rows in set (0.002 sec)
+
+
+
+MariaDB [collegeerp]> alter table login add constraint fk_test_123 foreign key(l
+
+ogin_roleid) references roles(role_id);
+
+ERROR 1005 (HY000): Can't create table `collegeerp`.`login` (errno: 150 "Foreign
+
+ key constraint is incorrectly formed")
+
+MariaDB [collegeerp]> alter table login add index login_roleid;
+
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that
+
+corresponds to your MariaDB server version for the right syntax to use near '' a
+
+t line 1
+
+MariaDB [collegeerp]> alter table login add constraint fk_test_123 foreign key(l
+
+ogin_roleid) references roles(role_id);
+
+ERROR 1005 (HY000): Can't create table `collegeerp`.`login` (errno: 150 "Foreign
+
+ key constraint is incorrectly formed")
+
+MariaDB [collegeerp]>
