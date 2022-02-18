@@ -1,0 +1,90 @@
+MariaDB [collegeerp]> create table location(lid int,lname varchar(30));
+ERROR 1050 (42S01): Table 'location' already exists
+MariaDB [collegeerp]> insert into location values(1,'Indore');
+Query OK, 1 row affected (0.053 sec)
+
+MariaDB [collegeerp]> insert into location values(2,'Bhopal');
+Query OK, 1 row affected (0.043 sec)
+
+MariaDB [collegeerp]> select * from location;
++------+--------+
+| lid  | lname  |
++------+--------+
+|    1 | Indore |
+|    2 | Bhopal |
+|    1 | Indore |
+|    2 | Bhopal |
++------+--------+
+4 rows in set (0.000 sec)
+
+MariaDB [collegeerp]> alter table emp add column lid int;
+ERROR 1060 (42S21): Duplicate column name 'lid'
+MariaDB [collegeerp]> select * from emp;
++-------+----------+------+------+
+| empid | empname  | dno  | lid  |
++-------+----------+------+------+
+|  1001 | xyz      |   10 |    2 |
+|  1002 | ramkumar |   10 |    1 |
+|  1003 | Jatin    |   30 |    2 |
+|  1004 | Ramesh   |  300 |    1 |
++-------+----------+------+------+
+4 rows in set (0.000 sec)
+
+MariaDB [collegeerp]> update emp set lid=1 where mod(empid,2)=0;
+Query OK, 0 rows affected (0.000 sec)
+Rows matched: 2  Changed: 0  Warnings: 0
+
+MariaDB [collegeerp]> update emp set lid=1 where mod(empid,2)=1;
+Query OK, 2 rows affected (0.090 sec)
+Rows matched: 2  Changed: 2  Warnings: 0
+
+MariaDB [collegeerp]> update emp set lid=2 where mod(empid,2)=1;
+Query OK, 2 rows affected (0.054 sec)
+Rows matched: 2  Changed: 2  Warnings: 0
+
+MariaDB [collegeerp]> select * from emp;
++-------+----------+------+------+
+| empid | empname  | dno  | lid  |
++-------+----------+------+------+
+|  1001 | xyz      |   10 |    2 |
+|  1002 | ramkumar |   10 |    1 |
+|  1003 | Jatin    |   30 |    2 |
+|  1004 | Ramesh   |  300 |    1 |
++-------+----------+------+------+
+4 rows in set (0.000 sec)
+
+MariaDB [collegeerp]> select * from dept;
++------+----------+
+| dno  | deptname |
++------+----------+
+|   10 | IT       |
+|   20 | SALES    |
+|   30 | MKT      |
++------+----------+
+3 rows in set (0.000 sec)
+
+MariaDB [collegeerp]> select * from location;
++------+--------+
+| lid  | lname  |
++------+--------+
+|    1 | Indore |
+|    2 | Bhopal |
+|    1 | Indore |
+|    2 | Bhopal |
++------+--------+
+4 rows in set (0.000 sec)
+
+MariaDB [collegeerp]> select empname,deptname,lname from emp e inner join dept d on e.dno=d.dno inner join location l on e.lid=l.lid;
++----------+----------+--------+
+| empname  | deptname | lname  |
++----------+----------+--------+
+| ramkumar | IT       | Indore |
+| xyz      | IT       | Bhopal |
+| Jatin    | MKT      | Bhopal |
+| ramkumar | IT       | Indore |
+| xyz      | IT       | Bhopal |
+| Jatin    | MKT      | Bhopal |
++----------+----------+--------+
+6 rows in set (0.000 sec)
+
+MariaDB [collegeerp]> notee
