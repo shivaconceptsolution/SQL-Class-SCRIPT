@@ -1,0 +1,81 @@
+MariaDB [collegeerp]> select * from emp where salary=(select max(salary) from emp where salary<(select max(salary) from emp));
++-------+---------+------+------+--------+
+| empid | empname | dno  | lid  | salary |
++-------+---------+------+------+--------+
+|  1003 | Jatin   |   30 |    2 |  45000 |
++-------+---------+------+------+--------+
+1 row in set (0.001 sec)
+
+MariaDB [collegeerp]> select * from emp where salary=(select max(salary) from emp where salary<(select max(salary) from emp where salary<(select max(salary) from emp)));
++-------+----------+------+------+--------+
+| empid | empname  | dno  | lid  | salary |
++-------+----------+------+------+--------+
+|  1001 | xyz      |   10 |    2 |  15000 |
+|  1002 | ramkumar |   10 |    1 |  15000 |
++-------+----------+------+------+--------+
+2 rows in set (0.002 sec)
+
+MariaDB [collegeerp]> select * from dept;
++------+----------+
+| dno  | deptname |
++------+----------+
+|   10 | IT       |
+|   20 | SALES    |
+|   30 | MKT      |
++------+----------+
+3 rows in set (0.001 sec)
+
+MariaDB [collegeerp]> select * from emp;
++-------+----------+------+------+--------+
+| empid | empname  | dno  | lid  | salary |
++-------+----------+------+------+--------+
+|  1001 | xyz      |   10 |    2 |  15000 |
+|  1002 | ramkumar |   10 |    1 |  15000 |
+|  1003 | Jatin    |   30 |    2 |  45000 |
+|  1004 | Ramesh   |  300 |    1 |  65000 |
++-------+----------+------+------+--------+
+4 rows in set (0.000 sec)
+
+MariaDB [collegeerp]> update emp set dno=20 where dno=300;
+Query OK, 1 row affected (0.077 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+MariaDB [collegeerp]> select * from emp;
++-------+----------+------+------+--------+
+| empid | empname  | dno  | lid  | salary |
++-------+----------+------+------+--------+
+|  1001 | xyz      |   10 |    2 |  15000 |
+|  1002 | ramkumar |   10 |    1 |  15000 |
+|  1003 | Jatin    |   30 |    2 |  45000 |
+|  1004 | Ramesh   |   20 |    1 |  65000 |
++-------+----------+------+------+--------+
+4 rows in set (0.000 sec)
+
+MariaDB [collegeerp]> select * from emp where dno=(select dno from dept where deptname='IT');
++-------+----------+------+------+--------+
+| empid | empname  | dno  | lid  | salary |
++-------+----------+------+------+--------+
+|  1001 | xyz      |   10 |    2 |  15000 |
+|  1002 | ramkumar |   10 |    1 |  15000 |
++-------+----------+------+------+--------+
+2 rows in set (0.000 sec)
+
+MariaDB [collegeerp]> select * from emp where dno=(select dno from dept where deptname='IT' and deptname='Sales');
+Empty set (0.001 sec)
+
+MariaDB [collegeerp]> select * from emp where dno=(select dno from dept where deptname='IT' or deptname='Sales');
+ERROR 1242 (21000): Subquery returns more than 1 row
+MariaDB [collegeerp]> select * from emp where dno IN(select dno from dept where deptname='IT' or deptname='Sales');
++-------+----------+------+------+--------+
+| empid | empname  | dno  | lid  | salary |
++-------+----------+------+------+--------+
+|  1001 | xyz      |   10 |    2 |  15000 |
+|  1002 | ramkumar |   10 |    1 |  15000 |
+|  1004 | Ramesh   |   20 |    1 |  65000 |
++-------+----------+------+------+--------+
+3 rows in set (0.044 sec)
+
+MariaDB [collegeerp]> select * from emp where dno ANY(select dno from dept where deptname='IT' or deptname='Sales');
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'ANY(select dno from dept where deptname='IT' or deptname='Sales')' at line 1
+MariaDB [collegeerp]> select * from emp where dno any(10,20);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'any(10,20)' at line 1

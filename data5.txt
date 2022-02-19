@@ -1,0 +1,148 @@
+MariaDB [collegeerp]> select * from emp where dno=(select dno from dept where deptname='sales');
+Empty set (0.145 sec)
+
+MariaDB [collegeerp]> select * from emp where dno=(select dno from dept where deptname='Sales');
+Empty set (0.001 sec)
+
+MariaDB [collegeerp]> select * from dept;
++------+----------+
+| dno  | deptname |
++------+----------+
+|   10 | IT       |
+|   20 | SALES    |
+|   30 | MKT      |
++------+----------+
+3 rows in set (0.000 sec)
+
+MariaDB [collegeerp]> select * from emp where dno=(select dno from dept where deptname='SALES');
+Empty set (0.000 sec)
+
+MariaDB [collegeerp]> select * from emp;
++-------+----------+------+------+
+| empid | empname  | dno  | lid  |
++-------+----------+------+------+
+|  1001 | xyz      |   10 |    2 |
+|  1002 | ramkumar |   10 |    1 |
+|  1003 | Jatin    |   30 |    2 |
+|  1004 | Ramesh   |  300 |    1 |
++-------+----------+------+------+
+4 rows in set (0.000 sec)
+
+MariaDB [collegeerp]> select * from emp where dno=(select dno from dept where deptname='IT');
++-------+----------+------+------+
+| empid | empname  | dno  | lid  |
++-------+----------+------+------+
+|  1001 | xyz      |   10 |    2 |
+|  1002 | ramkumar |   10 |    1 |
++-------+----------+------+------+
+2 rows in set (0.000 sec)
+
+MariaDB [collegeerp]> select * from emp inner join dept on emp.dno=dept.dno where deptname='IT';
++-------+----------+------+------+------+----------+
+| empid | empname  | dno  | lid  | dno  | deptname |
++-------+----------+------+------+------+----------+
+|  1001 | xyz      |   10 |    2 |   10 | IT       |
+|  1002 | ramkumar |   10 |    1 |   10 | IT       |
++-------+----------+------+------+------+----------+
+2 rows in set (0.063 sec)
+
+MariaDB [collegeerp]> select * from emp;
++-------+----------+------+------+
+| empid | empname  | dno  | lid  |
++-------+----------+------+------+
+|  1001 | xyz      |   10 |    2 |
+|  1002 | ramkumar |   10 |    1 |
+|  1003 | Jatin    |   30 |    2 |
+|  1004 | Ramesh   |  300 |    1 |
++-------+----------+------+------+
+4 rows in set (0.001 sec)
+
+MariaDB [collegeerp]> alter table emp add column salary int;
+Query OK, 0 rows affected (0.122 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+MariaDB [collegeerp]> desc emp;
++---------+-------------+------+-----+---------+-------+
+| Field   | Type        | Null | Key | Default | Extra |
++---------+-------------+------+-----+---------+-------+
+| empid   | int(11)     | YES  |     | NULL    |       |
+| empname | varchar(50) | YES  |     | NULL    |       |
+| dno     | int(11)     | YES  |     | NULL    |       |
+| lid     | int(11)     | YES  |     | NULL    |       |
+| salary  | int(11)     | YES  |     | NULL    |       |
++---------+-------------+------+-----+---------+-------+
+5 rows in set (0.003 sec)
+
+MariaDB [collegeerp]> select * from emp;
++-------+----------+------+------+--------+
+| empid | empname  | dno  | lid  | salary |
++-------+----------+------+------+--------+
+|  1001 | xyz      |   10 |    2 |   NULL |
+|  1002 | ramkumar |   10 |    1 |   NULL |
+|  1003 | Jatin    |   30 |    2 |   NULL |
+|  1004 | Ramesh   |  300 |    1 |   NULL |
++-------+----------+------+------+--------+
+4 rows in set (0.001 sec)
+
+MariaDB [collegeerp]> update emp set salary=25000 where empid=1001;
+Query OK, 1 row affected (0.079 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+MariaDB [collegeerp]> update emp set salary=15000 where empid=1001;
+Query OK, 1 row affected (0.109 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+MariaDB [collegeerp]> update emp set salary=15000 where empid=1002;
+Query OK, 1 row affected (0.083 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+MariaDB [collegeerp]> update emp set salary=45000 where empid=1003;
+Query OK, 1 row affected (0.085 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+MariaDB [collegeerp]> select * from emp;
++-------+----------+------+------+--------+
+| empid | empname  | dno  | lid  | salary |
++-------+----------+------+------+--------+
+|  1001 | xyz      |   10 |    2 |  15000 |
+|  1002 | ramkumar |   10 |    1 |  15000 |
+|  1003 | Jatin    |   30 |    2 |  45000 |
+|  1004 | Ramesh   |  300 |    1 |   NULL |
++-------+----------+------+------+--------+
+4 rows in set (0.000 sec)
+
+MariaDB [collegeerp]> select max(salary) from emp where salary<(select max(salary) from emp);
++-------------+
+| max(salary) |
++-------------+
+|       15000 |
++-------------+
+1 row in set (0.066 sec)
+
+MariaDB [collegeerp]> update emp set salary=65000 where empid=1004;
+Query OK, 1 row affected (0.080 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+MariaDB [collegeerp]> select max(salary) from emp where salary<(select max(salary) from emp);
++-------------+
+| max(salary) |
++-------------+
+|       45000 |
++-------------+
+1 row in set (0.000 sec)
+
+MariaDB [collegeerp]> select * from emp where salary=(select max(salary) from emp where salary<(select max(salary) from emp));
++-------+---------+------+------+--------+
+| empid | empname | dno  | lid  | salary |
++-------+---------+------+------+--------+
+|  1003 | Jatin   |   30 |    2 |  45000 |
++-------+---------+------+------+--------+
+1 row in set (0.002 sec)
+
+MariaDB [collegeerp]> select * from emp where salary=(select max(salary) from where salary=(select max(salary) from emp where salary<(select max(salary) from emp)));
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'where salary=(select max(salary) from emp where salary<(select max(salary) fr...' at line 1
+MariaDB [collegeerp]> select * from emp where salary=(select max(salary) from where salary=(select max(salary) from emp where salary<(select max(salary) from emp)));
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'where salary=(select max(salary) from emp where salary<(select max(salary) fr...' at line 1
+MariaDB [collegeerp]> select * from emp where salary=(select max(salary) from where salary<(select max(salary) from emp where salary<(select max(salary) from emp)));
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'where salary<(select max(salary) from emp where salary<(select max(salary) fr...' at line 1
+MariaDB [collegeerp]> notee
