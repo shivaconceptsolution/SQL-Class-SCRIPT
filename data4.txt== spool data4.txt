@@ -1,0 +1,27 @@
+MariaDB [collegeerp]> show databases;
++--------------------+
+| Database           |
++--------------------+
+| collegedb          |
+| collegeerp         |
+| ierp               |
+| information_schema |
+| markstest          |
+| mydb               |
+| mysql              |
+| performance_schema |
+| phpmyadmin         |
+| practicedb         |
+| school             |
+| schooldb           |
+| test               |
+| testdb             |
+| xyz                |
++--------------------+
+15 rows in set (0.059 sec)
+
+MariaDB [collegeerp]> use collegerp;
+ERROR 1049 (42000): Unknown database 'collegerp'
+MariaDB [collegeerp]> use collegeerp;
+Database changed
+MariaDB [collegeerp]> notee;
