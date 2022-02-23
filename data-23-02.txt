@@ -1,0 +1,364 @@
+MariaDB [collegeerp]> select curdate();
++------------+
+| curdate()  |
++------------+
+| 2022-02-23 |
++------------+
+1 row in set (0.018 sec)
+
+MariaDB [collegeerp]> select curtime();
++-----------+
+| curtime() |
++-----------+
+| 13:52:39  |
++-----------+
+1 row in set (0.042 sec)
+
+MariaDB [collegeerp]> select * from stu;
++-----+----------------------+-------+---------+
+| rno | name                 | fee   | monitor |
++-----+----------------------+-------+---------+
+|   1 | Amar                 | 12000 |    NULL |
+|   2 | Ram kumar Raguwanshi | 12000 |       1 |
+|   3 | eshwar               | 12000 |       1 |
+|   8 | ramesh               |  NULL |       1 |
+|   9 | test                 |  5000 |       1 |
+|  10 | test                 |  NULL |      14 |
+|  11 | test                 |  5000 |       1 |
+|  12 | test                 |  NULL |      14 |
+|  13 | kavi                 | 45000 |       1 |
+|  14 | jay                  | 50000 |    NULL |
+|  15 | shashi               | 35000 |       1 |
+|  16 | kapil                |  3300 |      14 |
++-----+----------------------+-------+---------+
+12 rows in set (0.157 sec)
+
+MariaDB [collegeerp]> alter table stu add column enroledate date;
+Query OK, 0 rows affected (0.204 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+MariaDB [collegeerp]> select * from stu;
++-----+----------------------+-------+---------+------------+
+| rno | name                 | fee   | monitor | enroledate |
++-----+----------------------+-------+---------+------------+
+|   1 | Amar                 | 12000 |    NULL | NULL       |
+|   2 | Ram kumar Raguwanshi | 12000 |       1 | NULL       |
+|   3 | eshwar               | 12000 |       1 | NULL       |
+|   8 | ramesh               |  NULL |       1 | NULL       |
+|   9 | test                 |  5000 |       1 | NULL       |
+|  10 | test                 |  NULL |      14 | NULL       |
+|  11 | test                 |  5000 |       1 | NULL       |
+|  12 | test                 |  NULL |      14 | NULL       |
+|  13 | kavi                 | 45000 |       1 | NULL       |
+|  14 | jay                  | 50000 |    NULL | NULL       |
+|  15 | shashi               | 35000 |       1 | NULL       |
+|  16 | kapil                |  3300 |      14 | NULL       |
++-----+----------------------+-------+---------+------------+
+12 rows in set (0.000 sec)
+
+MariaDB [collegeerp]> update stu set enroledate=curdate where mod(rno,2)=0;
+ERROR 1054 (42S22): Unknown column 'curdate' in 'field list'
+MariaDB [collegeerp]> update stu set enroledate=currdate where mod(rno,2)=0;
+ERROR 1054 (42S22): Unknown column 'currdate' in 'field list'
+MariaDB [collegeerp]> update stu set enroledate=curdate() where mod(rno,2)=0;
+Query OK, 6 rows affected (0.097 sec)
+Rows matched: 6  Changed: 6  Warnings: 0
+
+MariaDB [collegeerp]> select * from stu;
++-----+----------------------+-------+---------+------------+
+| rno | name                 | fee   | monitor | enroledate |
++-----+----------------------+-------+---------+------------+
+|   1 | Amar                 | 12000 |    NULL | NULL       |
+|   2 | Ram kumar Raguwanshi | 12000 |       1 | 2022-02-23 |
+|   3 | eshwar               | 12000 |       1 | NULL       |
+|   8 | ramesh               |  NULL |       1 | 2022-02-23 |
+|   9 | test                 |  5000 |       1 | NULL       |
+|  10 | test                 |  NULL |      14 | 2022-02-23 |
+|  11 | test                 |  5000 |       1 | NULL       |
+|  12 | test                 |  NULL |      14 | 2022-02-23 |
+|  13 | kavi                 | 45000 |       1 | NULL       |
+|  14 | jay                  | 50000 |    NULL | 2022-02-23 |
+|  15 | shashi               | 35000 |       1 | NULL       |
+|  16 | kapil                |  3300 |      14 | 2022-02-23 |
++-----+----------------------+-------+---------+------------+
+12 rows in set (0.000 sec)
+
+MariaDB [collegeerp]> update stu set enroledate=adddate(curdate,-30) where mod(rno,2)=0;
+ERROR 1054 (42S22): Unknown column 'curdate' in 'field list'
+MariaDB [collegeerp]> update stu set enroledate=adddate(curdate(),-30) where mod(rno,2)=0;
+Query OK, 6 rows affected (0.102 sec)
+Rows matched: 6  Changed: 6  Warnings: 0
+
+MariaDB [collegeerp]> select * from stu;
++-----+----------------------+-------+---------+------------+
+| rno | name                 | fee   | monitor | enroledate |
++-----+----------------------+-------+---------+------------+
+|   1 | Amar                 | 12000 |    NULL | NULL       |
+|   2 | Ram kumar Raguwanshi | 12000 |       1 | 2022-01-24 |
+|   3 | eshwar               | 12000 |       1 | NULL       |
+|   8 | ramesh               |  NULL |       1 | 2022-01-24 |
+|   9 | test                 |  5000 |       1 | NULL       |
+|  10 | test                 |  NULL |      14 | 2022-01-24 |
+|  11 | test                 |  5000 |       1 | NULL       |
+|  12 | test                 |  NULL |      14 | 2022-01-24 |
+|  13 | kavi                 | 45000 |       1 | NULL       |
+|  14 | jay                  | 50000 |    NULL | 2022-01-24 |
+|  15 | shashi               | 35000 |       1 | NULL       |
+|  16 | kapil                |  3300 |      14 | 2022-01-24 |
++-----+----------------------+-------+---------+------------+
+12 rows in set (0.001 sec)
+
+MariaDB [collegeerp]> update stu set enroledate=curdate() where mod(rno,2)=1;
+Query OK, 6 rows affected (0.067 sec)
+Rows matched: 6  Changed: 6  Warnings: 0
+
+MariaDB [collegeerp]> select * from stu;
++-----+----------------------+-------+---------+------------+
+| rno | name                 | fee   | monitor | enroledate |
++-----+----------------------+-------+---------+------------+
+|   1 | Amar                 | 12000 |    NULL | 2022-02-23 |
+|   2 | Ram kumar Raguwanshi | 12000 |       1 | 2022-01-24 |
+|   3 | eshwar               | 12000 |       1 | 2022-02-23 |
+|   8 | ramesh               |  NULL |       1 | 2022-01-24 |
+|   9 | test                 |  5000 |       1 | 2022-02-23 |
+|  10 | test                 |  NULL |      14 | 2022-01-24 |
+|  11 | test                 |  5000 |       1 | 2022-02-23 |
+|  12 | test                 |  NULL |      14 | 2022-01-24 |
+|  13 | kavi                 | 45000 |       1 | 2022-02-23 |
+|  14 | jay                  | 50000 |    NULL | 2022-01-24 |
+|  15 | shashi               | 35000 |       1 | 2022-02-23 |
+|  16 | kapil                |  3300 |      14 | 2022-01-24 |
++-----+----------------------+-------+---------+------------+
+12 rows in set (0.000 sec)
+
+MariaDB [collegeerp]> select sysdate;
+ERROR 1054 (42S22): Unknown column 'sysdate' in 'field list'
+MariaDB [collegeerp]> select sysdate();
++---------------------+
+| sysdate()           |
++---------------------+
+| 2022-02-23 13:58:10 |
++---------------------+
+1 row in set (0.011 sec)
+
+MariaDB [collegeerp]> select addtime(curtime,3);
+ERROR 1054 (42S22): Unknown column 'curtime' in 'field list'
+MariaDB [collegeerp]> select addtime(currtime(),3);
+ERROR 1305 (42000): FUNCTION collegeerp.currtime does not exist
+MariaDB [collegeerp]> select addtime(curtime(),3);
++----------------------+
+| addtime(curtime(),3) |
++----------------------+
+| 14:02:20             |
++----------------------+
+1 row in set (0.000 sec)
+
+MariaDB [collegeerp]> select addtime(curtime(),3:0:0);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ':0:0)' at line 1
+MariaDB [collegeerp]> select addtime(curtime(),'3');
++------------------------+
+| addtime(curtime(),'3') |
++------------------------+
+| 14:04:31               |
++------------------------+
+1 row in set (0.000 sec)
+
+MariaDB [collegeerp]> select addtime('2018-09-22', '11.0000023');  
++-------------------------------------+
+| addtime('2018-09-22', '11.0000023') |
++-------------------------------------+
+| 00:20:29.000002                     |
++-------------------------------------+
+1 row in set, 2 warnings (0.043 sec)
+
+MariaDB [collegeerp]> select addtime(curdate(), '11.0000023');  
++----------------------------------+
+| addtime(curdate(), '11.0000023') |
++----------------------------------+
+| 2022-02-23 00:00:11.000002       |
++----------------------------------+
+1 row in set, 1 warning (0.000 sec)
+
+MariaDB [collegeerp]> select addtime(curdate(), '3600.0000023');  
++------------------------------------+
+| addtime(curdate(), '3600.0000023') |
++------------------------------------+
+| 2022-02-23 00:36:00.000002         |
++------------------------------------+
+1 row in set, 1 warning (0.000 sec)
+
+MariaDB [collegeerp]> select addtime(curdate(), '12:02:30.0000023');  
++----------------------------------------+
+| addtime(curdate(), '12:02:30.0000023') |
++----------------------------------------+
+| 2022-02-23 12:02:30.000002             |
++----------------------------------------+
+1 row in set, 1 warning (0.000 sec)
+
+MariaDB [collegeerp]> select addtime(curdate(), currtime());  
+ERROR 1305 (42000): FUNCTION collegeerp.currtime does not exist
+MariaDB [collegeerp]> select addtime(curdate(), curtime());  
++-------------------------------+
+| addtime(curdate(), curtime()) |
++-------------------------------+
+| 2022-02-23 14:07:41           |
++-------------------------------+
+1 row in set (0.000 sec)
+
+MariaDB [collegeerp]> select datediff(currdate,'1995-02-25');
+ERROR 1054 (42S22): Unknown column 'currdate' in 'field list'
+MariaDB [collegeerp]> select datediff(curdate(),'1995-02-25');
++----------------------------------+
+| datediff(curdate(),'1995-02-25') |
++----------------------------------+
+|                             9860 |
++----------------------------------+
+1 row in set (0.000 sec)
+
+MariaDB [collegeerp]> select datediff(curdate(),'1995-02-25')/365;
++--------------------------------------+
+| datediff(curdate(),'1995-02-25')/365 |
++--------------------------------------+
+|                              27.0137 |
++--------------------------------------+
+1 row in set (0.000 sec)
+
+MariaDB [collegeerp]> select * from stu;
++-----+----------------------+-------+---------+------------+
+| rno | name                 | fee   | monitor | enroledate |
++-----+----------------------+-------+---------+------------+
+|   1 | Amar                 | 12000 |    NULL | 2022-02-23 |
+|   2 | Ram kumar Raguwanshi | 12000 |       1 | 2022-01-24 |
+|   3 | eshwar               | 12000 |       1 | 2022-02-23 |
+|   8 | ramesh               |  NULL |       1 | 2022-01-24 |
+|   9 | test                 |  5000 |       1 | 2022-02-23 |
+|  10 | test                 |  NULL |      14 | 2022-01-24 |
+|  11 | test                 |  5000 |       1 | 2022-02-23 |
+|  12 | test                 |  NULL |      14 | 2022-01-24 |
+|  13 | kavi                 | 45000 |       1 | 2022-02-23 |
+|  14 | jay                  | 50000 |    NULL | 2022-01-24 |
+|  15 | shashi               | 35000 |       1 | 2022-02-23 |
+|  16 | kapil                |  3300 |      14 | 2022-01-24 |
++-----+----------------------+-------+---------+------------+
+12 rows in set (0.001 sec)
+
+MariaDB [collegeerp]> select datediff(curdate(),enroledate)/365 from stu;
++------------------------------------+
+| datediff(curdate(),enroledate)/365 |
++------------------------------------+
+|                             0.0000 |
+|                             0.0822 |
+|                             0.0000 |
+|                             0.0822 |
+|                             0.0000 |
+|                             0.0822 |
+|                             0.0000 |
+|                             0.0822 |
+|                             0.0000 |
+|                             0.0822 |
+|                             0.0000 |
+|                             0.0822 |
++------------------------------------+
+12 rows in set (0.000 sec)
+
+MariaDB [collegeerp]> select date_format(curdate(),'%d-%m-%y');
++-----------------------------------+
+| date_format(curdate(),'%d-%m-%y') |
++-----------------------------------+
+| 23-02-22                          |
++-----------------------------------+
+1 row in set (0.001 sec)
+
+MariaDB [collegeerp]> select date_format(curdate(),'%d-%m-%Y');
++-----------------------------------+
+| date_format(curdate(),'%d-%m-%Y') |
++-----------------------------------+
+| 23-02-2022                        |
++-----------------------------------+
+1 row in set (0.000 sec)
+
+MariaDB [collegeerp]> select date_format(curdate(),'%d-%M-%Y');
++-----------------------------------+
+| date_format(curdate(),'%d-%M-%Y') |
++-----------------------------------+
+| 23-February-2022                  |
++-----------------------------------+
+1 row in set (0.012 sec)
+
+MariaDB [collegeerp]> select date_format(curdate(),'%D-%M-%Y');
++-----------------------------------+
+| date_format(curdate(),'%D-%M-%Y') |
++-----------------------------------+
+| 23rd-February-2022                |
++-----------------------------------+
+1 row in set (0.000 sec)
+
+MariaDB [collegeerp]> select day();
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ')' at line 1
+MariaDB [collegeerp]> select day(curdate());
++----------------+
+| day(curdate()) |
++----------------+
+|             23 |
++----------------+
+1 row in set (0.000 sec)
+
+MariaDB [collegeerp]> select dayname(currdate());
+ERROR 1305 (42000): FUNCTION collegeerp.currdate does not exist
+MariaDB [collegeerp]> select dayname(curdate());
++--------------------+
+| dayname(curdate()) |
++--------------------+
+| Wednesday          |
++--------------------+
+1 row in set (0.000 sec)
+
+MariaDB [collegeerp]> select dayname('1995-02-25');
++-----------------------+
+| dayname('1995-02-25') |
++-----------------------+
+| Saturday              |
++-----------------------+
+1 row in set (0.000 sec)
+
+MariaDB [collegeerp]> select current_timestamp();
++---------------------+
+| current_timestamp() |
++---------------------+
+| 2022-02-23 14:26:57 |
++---------------------+
+1 row in set (0.001 sec)
+
+MariaDB [collegeerp]> select now();
++---------------------+
+| now()               |
++---------------------+
+| 2022-02-23 14:28:59 |
++---------------------+
+1 row in set (0.001 sec)
+
+MariaDB [collegeerp]> select localtime();
++---------------------+
+| localtime()         |
++---------------------+
+| 2022-02-23 14:29:32 |
++---------------------+
+1 row in set (0.000 sec)
+
+MariaDB [collegeerp]> select makedate('1995',56);
++---------------------+
+| makedate('1995',56) |
++---------------------+
+| 1995-02-25          |
++---------------------+
+1 row in set (0.000 sec)
+
+MariaDB [collegeerp]> select maketime(10,12,8);
++-------------------+
+| maketime(10,12,8) |
++-------------------+
+| 10:12:08          |
++-------------------+
+1 row in set (0.001 sec)
+
+MariaDB [collegeerp]> notee;
