@@ -1,0 +1,167 @@
+MariaDB [collegeerp]> select * fro stu;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'fro stu' at line 1
+MariaDB [collegeerp]> select * from stu;
++-----+----------------------+-------+---------+------------+
+| rno | name                 | fee   | monitor | enroledate |
++-----+----------------------+-------+---------+------------+
+|   1 | Amar                 | 12000 |    NULL | 2022-02-23 |
+|   2 | Ram kumar Raguwanshi | 12000 |       1 | 2022-01-24 |
+|   3 | eshwar               | 12000 |       1 | 2022-02-23 |
+|   8 | ramesh               |  NULL |       1 | 2022-01-24 |
+|   9 | test                 |  5000 |       1 | 2022-02-23 |
+|  10 | test                 |  NULL |      14 | 2022-01-24 |
+|  11 | test                 |  5000 |       1 | 2022-02-23 |
+|  12 | test                 |  NULL |      14 | 2022-01-24 |
+|  13 | kavi                 | 45000 |       1 | 2022-02-23 |
+|  14 | jay                  | 50000 |    NULL | 2022-01-24 |
+|  15 | shashi               | 35000 |       1 | 2022-02-23 |
+|  16 | kapil                |  3300 |      14 | 2022-01-24 |
++-----+----------------------+-------+---------+------------+
+12 rows in set (0.000 sec)
+
+MariaDB [collegeerp]> alter table stu add column branch varchar(50);
+Query OK, 0 rows affected (0.139 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+MariaDB [collegeerp]> update stu set branch='palasia' where mod(rno,2)=0;
+Query OK, 6 rows affected (0.074 sec)
+Rows matched: 6  Changed: 6  Warnings: 0
+
+MariaDB [collegeerp]> update stu set branch='vijaynagar' where mod(rno,2)=1;
+Query OK, 6 rows affected (0.082 sec)
+Rows matched: 6  Changed: 6  Warnings: 0
+
+MariaDB [collegeerp]> select * from stu;
++-----+----------------------+-------+---------+------------+------------+
+| rno | name                 | fee   | monitor | enroledate | branch     |
++-----+----------------------+-------+---------+------------+------------+
+|   1 | Amar                 | 12000 |    NULL | 2022-02-23 | vijaynagar |
+|   2 | Ram kumar Raguwanshi | 12000 |       1 | 2022-01-24 | palasia    |
+|   3 | eshwar               | 12000 |       1 | 2022-02-23 | vijaynagar |
+|   8 | ramesh               |  NULL |       1 | 2022-01-24 | palasia    |
+|   9 | test                 |  5000 |       1 | 2022-02-23 | vijaynagar |
+|  10 | test                 |  NULL |      14 | 2022-01-24 | palasia    |
+|  11 | test                 |  5000 |       1 | 2022-02-23 | vijaynagar |
+|  12 | test                 |  NULL |      14 | 2022-01-24 | palasia    |
+|  13 | kavi                 | 45000 |       1 | 2022-02-23 | vijaynagar |
+|  14 | jay                  | 50000 |    NULL | 2022-01-24 | palasia    |
+|  15 | shashi               | 35000 |       1 | 2022-02-23 | vijaynagar |
+|  16 | kapil                |  3300 |      14 | 2022-01-24 | palasia    |
++-----+----------------------+-------+---------+------------+------------+
+12 rows in set (0.000 sec)
+
+MariaDB [collegeerp]> create view stu_vijaynagar as select * from student where branch='vijaynagar';
+ERROR 1054 (42S22): Unknown column 'branch' in 'where clause'
+MariaDB [collegeerp]> create view stu_vijaynagar as select * from stu where branch='vijaynagar';
+Query OK, 0 rows affected (0.068 sec)
+
+MariaDB [collegeerp]> create view stu_vijaynagar as select * from stu where branch='palasia';
+ERROR 1050 (42S01): Table 'stu_vijaynagar' already exists
+MariaDB [collegeerp]> create view stu_palasia as select * from stu where branch='palasia';
+Query OK, 0 rows affected (0.061 sec)
+
+MariaDB [collegeerp]> select * from stu_vijaynagar;
++-----+--------+-------+---------+------------+------------+
+| rno | name   | fee   | monitor | enroledate | branch     |
++-----+--------+-------+---------+------------+------------+
+|   1 | Amar   | 12000 |    NULL | 2022-02-23 | vijaynagar |
+|   3 | eshwar | 12000 |       1 | 2022-02-23 | vijaynagar |
+|   9 | test   |  5000 |       1 | 2022-02-23 | vijaynagar |
+|  11 | test   |  5000 |       1 | 2022-02-23 | vijaynagar |
+|  13 | kavi   | 45000 |       1 | 2022-02-23 | vijaynagar |
+|  15 | shashi | 35000 |       1 | 2022-02-23 | vijaynagar |
++-----+--------+-------+---------+------------+------------+
+6 rows in set (0.006 sec)
+
+MariaDB [collegeerp]> select * from stu_palasia;
++-----+----------------------+-------+---------+------------+---------+
+| rno | name                 | fee   | monitor | enroledate | branch  |
++-----+----------------------+-------+---------+------------+---------+
+|   2 | Ram kumar Raguwanshi | 12000 |       1 | 2022-01-24 | palasia |
+|   8 | ramesh               |  NULL |       1 | 2022-01-24 | palasia |
+|  10 | test                 |  NULL |      14 | 2022-01-24 | palasia |
+|  12 | test                 |  NULL |      14 | 2022-01-24 | palasia |
+|  14 | jay                  | 50000 |    NULL | 2022-01-24 | palasia |
+|  16 | kapil                |  3300 |      14 | 2022-01-24 | palasia |
++-----+----------------------+-------+---------+------------+---------+
+6 rows in set (0.001 sec)
+
+MariaDB [collegeerp]> insert into stu_vijaynagar values(17,'jay',1,curdate,'vijaynagar');
+ERROR 1054 (42S22): Unknown column 'curdate' in 'field list'
+MariaDB [collegeerp]> insert into stu_vijaynagar values(17,'jay',34000,1,curdate(),'vijaynagar');
+Query OK, 1 row affected (0.092 sec)
+
+MariaDB [collegeerp]> select * from stu_vijaynagar;
++-----+--------+-------+---------+------------+------------+
+| rno | name   | fee   | monitor | enroledate | branch     |
++-----+--------+-------+---------+------------+------------+
+|   1 | Amar   | 12000 |    NULL | 2022-02-23 | vijaynagar |
+|   3 | eshwar | 12000 |       1 | 2022-02-23 | vijaynagar |
+|   9 | test   |  5000 |       1 | 2022-02-23 | vijaynagar |
+|  11 | test   |  5000 |       1 | 2022-02-23 | vijaynagar |
+|  13 | kavi   | 45000 |       1 | 2022-02-23 | vijaynagar |
+|  15 | shashi | 35000 |       1 | 2022-02-23 | vijaynagar |
+|  17 | jay    | 34000 |       1 | 2022-02-24 | vijaynagar |
++-----+--------+-------+---------+------------+------------+
+7 rows in set (0.001 sec)
+
+MariaDB [collegeerp]> select * from stu_palasia;
++-----+----------------------+-------+---------+------------+---------+
+| rno | name                 | fee   | monitor | enroledate | branch  |
++-----+----------------------+-------+---------+------------+---------+
+|   2 | Ram kumar Raguwanshi | 12000 |       1 | 2022-01-24 | palasia |
+|   8 | ramesh               |  NULL |       1 | 2022-01-24 | palasia |
+|  10 | test                 |  NULL |      14 | 2022-01-24 | palasia |
+|  12 | test                 |  NULL |      14 | 2022-01-24 | palasia |
+|  14 | jay                  | 50000 |    NULL | 2022-01-24 | palasia |
+|  16 | kapil                |  3300 |      14 | 2022-01-24 | palasia |
++-----+----------------------+-------+---------+------------+---------+
+6 rows in set (0.000 sec)
+
+MariaDB [collegeerp]> select * from stu;
++-----+----------------------+-------+---------+------------+------------+
+| rno | name                 | fee   | monitor | enroledate | branch     |
++-----+----------------------+-------+---------+------------+------------+
+|   1 | Amar                 | 12000 |    NULL | 2022-02-23 | vijaynagar |
+|   2 | Ram kumar Raguwanshi | 12000 |       1 | 2022-01-24 | palasia    |
+|   3 | eshwar               | 12000 |       1 | 2022-02-23 | vijaynagar |
+|   8 | ramesh               |  NULL |       1 | 2022-01-24 | palasia    |
+|   9 | test                 |  5000 |       1 | 2022-02-23 | vijaynagar |
+|  10 | test                 |  NULL |      14 | 2022-01-24 | palasia    |
+|  11 | test                 |  5000 |       1 | 2022-02-23 | vijaynagar |
+|  12 | test                 |  NULL |      14 | 2022-01-24 | palasia    |
+|  13 | kavi                 | 45000 |       1 | 2022-02-23 | vijaynagar |
+|  14 | jay                  | 50000 |    NULL | 2022-01-24 | palasia    |
+|  15 | shashi               | 35000 |       1 | 2022-02-23 | vijaynagar |
+|  16 | kapil                |  3300 |      14 | 2022-01-24 | palasia    |
+|  17 | jay                  | 34000 |       1 | 2022-02-24 | vijaynagar |
++-----+----------------------+-------+---------+------------+------------+
+13 rows in set (0.000 sec)
+
+MariaDB [collegeerp]> create view maxstu as select * from stu where fee= (select ax(fee) from stu); 
+ERROR 1305 (42000): FUNCTION collegeerp.ax does not exist
+MariaDB [collegeerp]> create view maxstu as select * from stu where fee= (select max(fee) from stu); 
+Query OK, 0 rows affected (0.070 sec)
+
+MariaDB [collegeerp]> select * from maxstu;
++-----+------+-------+---------+------------+---------+
+| rno | name | fee   | monitor | enroledate | branch  |
++-----+------+-------+---------+------------+---------+
+|  14 | jay  | 50000 |    NULL | 2022-01-24 | palasia |
++-----+------+-------+---------+------------+---------+
+1 row in set (0.039 sec)
+
+MariaDB [collegeerp]> create view maxfee as (select max(fee) from stu); 
+Query OK, 0 rows affected (0.065 sec)
+
+MariaDB [collegeerp]> select maxfee fro stu;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'stu' at line 1
+MariaDB [collegeerp]> select * from maxfee;
++----------+
+| max(fee) |
++----------+
+|    50000 |
++----------+
+1 row in set (0.015 sec)
+
+MariaDB [collegeerp]> notee
