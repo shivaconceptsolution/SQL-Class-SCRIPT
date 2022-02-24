@@ -1,0 +1,243 @@
+MariaDB [collegeerp]> select * from stu;
++-----+----------------------+-------+---------+------------+
+| rno | name                 | fee   | monitor | enroledate |
++-----+----------------------+-------+---------+------------+
+|   1 | Amar                 | 12000 |    NULL | 2022-02-23 |
+|   2 | Ram kumar Raguwanshi | 12000 |       1 | 2022-01-24 |
+|   3 | eshwar               | 12000 |       1 | 2022-02-23 |
+|   8 | ramesh               |  NULL |       1 | 2022-01-24 |
+|   9 | test                 |  5000 |       1 | 2022-02-23 |
+|  10 | test                 |  NULL |      14 | 2022-01-24 |
+|  11 | test                 |  5000 |       1 | 2022-02-23 |
+|  12 | test                 |  NULL |      14 | 2022-01-24 |
+|  13 | kavi                 | 45000 |       1 | 2022-02-23 |
+|  14 | jay                  | 50000 |    NULL | 2022-01-24 |
+|  15 | shashi               | 35000 |       1 | 2022-02-23 |
+|  16 | kapil                |  3300 |      14 | 2022-01-24 |
++-----+----------------------+-------+---------+------------+
+12 rows in set (0.098 sec)
+
+MariaDB [collegeerp]> select abs(-2);
++---------+
+| abs(-2) |
++---------+
+|       2 |
++---------+
+1 row in set (0.074 sec)
+
+MariaDB [collegeerp]> select abs(2);
++--------+
+| abs(2) |
++--------+
+|      2 |
++--------+
+1 row in set (0.000 sec)
+
+MariaDB [collegeerp]> select sqrt(5);
++------------------+
+| sqrt(5)          |
++------------------+
+| 2.23606797749979 |
++------------------+
+1 row in set (0.000 sec)
+
+MariaDB [collegeerp]> select pow(5,2);
++----------+
+| pow(5,2) |
++----------+
+|       25 |
++----------+
+1 row in set (0.054 sec)
+
+MariaDB [collegeerp]> selecr exp(3);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'selecr exp(3)' at line 1
+MariaDB [collegeerp]> select exp(3);
++--------------------+
+| exp(3)             |
++--------------------+
+| 20.085536923187668 |
++--------------------+
+1 row in set (0.026 sec)
+
+MariaDB [collegeerp]> select log(5);
++--------------------+
+| log(5)             |
++--------------------+
+| 1.6094379124341003 |
++--------------------+
+1 row in set (0.000 sec)
+
+MariaDB [collegeerp]> select ceil(2.8);
++-----------+
+| ceil(2.8) |
++-----------+
+|         3 |
++-----------+
+1 row in set (0.041 sec)
+
+MariaDB [collegeerp]> select ceil(2.1);
++-----------+
+| ceil(2.1) |
++-----------+
+|         3 |
++-----------+
+1 row in set (0.000 sec)
+
+MariaDB [collegeerp]> select floor(2.9);
++------------+
+| floor(2.9) |
++------------+
+|          2 |
++------------+
+1 row in set (0.000 sec)
+
+MariaDB [collegeerp]> select round(2.987,2);
++----------------+
+| round(2.987,2) |
++----------------+
+|           2.99 |
++----------------+
+1 row in set (0.000 sec)
+
+MariaDB [collegeerp]> select round(2.983,2);
++----------------+
+| round(2.983,2) |
++----------------+
+|           2.98 |
++----------------+
+1 row in set (0.000 sec)
+
+MariaDB [collegeerp]> select round(2.985,2);
++----------------+
+| round(2.985,2) |
++----------------+
+|           2.99 |
++----------------+
+1 row in set (0.000 sec)
+
+MariaDB [collegeerp]> select round(2.985,1);
++----------------+
+| round(2.985,1) |
++----------------+
+|            3.0 |
++----------------+
+1 row in set (0.000 sec)
+
+MariaDB [collegeerp]> select round(2.945,1);
++----------------+
+| round(2.945,1) |
++----------------+
+|            2.9 |
++----------------+
+1 row in set (0.000 sec)
+
+MariaDB [collegeerp]> select round(2.945,0);
++----------------+
+| round(2.945,0) |
++----------------+
+|              3 |
++----------------+
+1 row in set (0.000 sec)
+
+MariaDB [collegeerp]> select round(2.945,-1);
++-----------------+
+| round(2.945,-1) |
++-----------------+
+|               0 |
++-----------------+
+1 row in set (0.000 sec)
+
+MariaDB [collegeerp]> select round(23.945,-1);
++------------------+
+| round(23.945,-1) |
++------------------+
+|               20 |
++------------------+
+1 row in set (0.000 sec)
+
+MariaDB [collegeerp]> select round(23.945,-2);
++------------------+
+| round(23.945,-2) |
++------------------+
+|                0 |
++------------------+
+1 row in set (0.000 sec)
+
+MariaDB [collegeerp]> select round(234.945,-1);
++-------------------+
+| round(234.945,-1) |
++-------------------+
+|               230 |
++-------------------+
+1 row in set (0.000 sec)
+
+MariaDB [collegeerp]> select round(234.945,-2);
++-------------------+
+| round(234.945,-2) |
++-------------------+
+|               200 |
++-------------------+
+1 row in set (0.000 sec)
+
+MariaDB [collegeerp]> select round(234.945,-3);
++-------------------+
+| round(234.945,-3) |
++-------------------+
+|                 0 |
++-------------------+
+1 row in set (0.000 sec)
+
+MariaDB [collegeerp]> select trunc(192.867,2);
+ERROR 1305 (42000): FUNCTION collegeerp.trunc does not exist
+MariaDB [collegeerp]> select truncate(192.867,2);
++---------------------+
+| truncate(192.867,2) |
++---------------------+
+|              192.86 |
++---------------------+
+1 row in set (0.000 sec)
+
+MariaDB [collegeerp]> select truncate(192.867,1);
++---------------------+
+| truncate(192.867,1) |
++---------------------+
+|               192.8 |
++---------------------+
+1 row in set (0.000 sec)
+
+MariaDB [collegeerp]> select round(192.867,1);
++------------------+
+| round(192.867,1) |
++------------------+
+|            192.9 |
++------------------+
+1 row in set (0.000 sec)
+
+MariaDB [collegeerp]> select sin(45);
++--------------------+
+| sin(45)            |
++--------------------+
+| 0.8509035245341184 |
++--------------------+
+1 row in set (0.000 sec)
+
+MariaDB [collegeerp]> select sin(rno) from stu;
++---------------------+
+| sin(rno)            |
++---------------------+
+|  0.8414709848078965 |
+|  0.9092974268256817 |
+|  0.1411200080598672 |
+|  0.9893582466233818 |
+|  0.4121184852417566 |
+| -0.5440211108893698 |
+| -0.9999902065507035 |
+| -0.5365729180004349 |
+|  0.4201670368266409 |
+|  0.9906073556948704 |
+|  0.6502878401571168 |
+| -0.2879033166650653 |
++---------------------+
+12 rows in set (0.001 sec)
+
+MariaDB [collegeerp]> notee
